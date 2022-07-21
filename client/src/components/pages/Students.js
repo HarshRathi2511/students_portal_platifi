@@ -62,7 +62,6 @@ export default function Modal() {
 
   const toggleModal = () => {
     setModal(!modal);
-
     setUsers([]);
   };
 
@@ -108,7 +107,9 @@ export default function Modal() {
               </thead>
               <tbody>
                 {Array.isArray(users)
-                  ? users.map((user) => {
+                  ? users.length===0? <p>
+                    No students are in the database ...
+                  </p>:users.map((user) => {
                       return (
                         <tr>
                           <td>{user.name}</td>
