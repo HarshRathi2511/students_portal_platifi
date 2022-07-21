@@ -22,6 +22,7 @@ import { deleteUser } from "./Service/api.js";
 import { Link } from "react-router-dom";
 import Edit from "./edit";
 import { useHistory } from "react-router";
+import LoadingSpinner from "../spinner/spinner";
 
 export default function Modal() {
   const [modal, setModal] = useState(false);
@@ -29,6 +30,9 @@ export default function Modal() {
   const [open, setOpen] = useState(false);
   const history = useHistory();
   const [users, setUsers] = useState([]);
+
+  // state for loading the screen
+  const [isLoading, setIsLoading] = useState(false);
 
   const { name, EmailID, contactno, gender, branch, USN } = users;
 
@@ -47,12 +51,16 @@ export default function Modal() {
   };
 
   useEffect(() => {
+    
     getAllUsers();
+    
   }, []);
 
   const getAllUsers = async () => {
+    setIsLoading(true)
     let response = await getUsers();
     setUsers(response.data);
+    setIsLoading(false)
   };
 
   const deleteUserDetails = async (_id) => {
@@ -106,10 +114,13 @@ export default function Modal() {
                 </tr>
               </thead>
               <tbody>
-                {Array.isArray(users)
-                  ? users.length===0? <p>
-                    No students are in the database ...
-                  </p>:users.map((user) => {
+                {Array.isArray(users) ? (
+                  isLoading === true ? (
+                    <LoadingSpinner />
+                  ) : users.length === 0 ? (
+                    <p>No students are in the database ...</p>
+                  ) : (
+                    users.map((user) => {
                       return (
                         <tr>
                           <td>{user.name}</td>
@@ -137,7 +148,8 @@ export default function Modal() {
                         </tr>
                       );
                     })
-                  : null}
+                  )
+                ) : null}
               </tbody>
             </table>
           </div>
