@@ -44,27 +44,29 @@ export default function Modal() {
   const addUserDetails = async (e) => {
     setOpen(true);
     setModal(!modal);
-    setUsers([]);
+    // setUsers([]);
+    setIsLoading(true);
     e.preventDefault();
     await addUser(users);
+    setIsLoading(false);
     window.location.reload(false);
   };
 
   useEffect(() => {
-    
     getAllUsers();
-    
   }, []);
 
   const getAllUsers = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     let response = await getUsers();
     setUsers(response.data);
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   const deleteUserDetails = async (_id) => {
+    setIsLoading(true);
     await deleteUser(_id);
+    setIsLoading(false);
     window.location.reload(false);
   };
 
