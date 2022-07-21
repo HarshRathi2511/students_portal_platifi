@@ -97,7 +97,7 @@ export default function Modal() {
     <>
       <div className="Main">
         <div className="addition-container">
-          <h1> Student Details Portal</h1>
+          <h1> <b>STUDENT MANAGEMENT PORTAL</b></h1>
           <button onClick={toggleModal} className="btn-modal">
             Add Student
           </button>
@@ -108,11 +108,11 @@ export default function Modal() {
                 <tr>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>Phone Number</th>
+                  <th>Contact</th>
                   <th>Gender</th>
                   <th>Branch</th>
                   <th>USN</th>
-                  <th> Actions </th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -137,7 +137,7 @@ export default function Modal() {
                               component={Link}
                               to={`/students/edit/${user._id}`}
                             >
-                              <FaIcons.FaEdit />{" "}
+                              <FaIcons.FaEdit />{""}
                             </Button>
 
                             <Button
